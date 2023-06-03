@@ -3,7 +3,6 @@ from PyQt5.uic import loadUi
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 from PyQt5.QtCore import QIODevice, QPoint
 from PyQt5 import QtCore, QtWidgets
-import numpy as np
 import sys
 
 class AppStm(QMainWindow):
@@ -37,20 +36,27 @@ class AppStm(QMainWindow):
       self.serial.readyRead.connect(self.read_data)
       #botones
       self.led1.clicked.connect(lambda: self.control_led1("click"))
-      self.led2.clicked.connect(lambda:self.control_led2("click"))
-      self.vel.valueChanged.connect(self.vel_m1)
+      self.led1off.clicked.connect(lambda: self.control_led1off("click"))
+      self.led2.clicked.connect(lambda: self.control_led2("click"))
+      self.led2off.clicked.connect(lambda: self.control_led2off("click"))
+      self.led3.clicked.connect(lambda: self.control_led3("click"))
+      self.led3off.clicked.connect(lambda: self.control_led3off("click"))
+      self.led4.clicked.connect(lambda: self.control_led4("click"))
+      self.led4off.clicked.connect(lambda:self.control_led4off("click"))
+      self.led5.clicked.connect(lambda: self.control_led5("click"))
+      self.led5off.clicked.connect(lambda:self.control_led5off("click"))
+      self.led6.clicked.connect(lambda: self.control_led6("click"))
+      self.led6off.clicked.connect(lambda:self.control_led6off("click"))
+      self.led7.clicked.connect(lambda: self.control_led7("click"))
+      self.led7off.clicked.connect(lambda:self.control_led7off("click"))
+      self.led8.clicked.connect(lambda: self.control_led8("click"))
+      self.led8off.clicked.connect(lambda:self.control_led8off("click"))
       self.stop.clicked.connect(lambda: self.control_stop("click"))
       self.left.clicked.connect(lambda: self.control_left("click"))
       self.right.clicked.connect(lambda: self.control_right("click"))
-      self.vel_2.valueChanged.connect(self.vel_m2)
       self.stop_2.clicked.connect(lambda: self.control_stop_2("click"))
       self.left_2.clicked.connect(lambda: self.control_left_2("click"))
       self.right_2.clicked.connect(lambda: self.control_right_2("click"))
-      self.vel_3.valueChanged.connect(self.vel_sm)
-      self.stop_3.clicked.connect(lambda: self.control_stop_3("click"))
-      self.left_3.clicked.connect(lambda: self.control_left_3("click"))
-      self.right_3.clicked.connect(lambda: self.control_right_3("click"))
-
       self.read_ports()
 
     def read_ports(self):
@@ -78,85 +84,123 @@ class AppStm(QMainWindow):
         if not self.serial.canReadLine(): return 
         rx = self.serial.readLine()
         x=str(rx, 'utf-8').strip()
-        x=float(x)
-        print(x)
+        
     
     def send_data(self, data):
       data= data + "\n"
-      print(data)
       if self.serial.isOpen():
          self.serial.write(data.encode())
     
-    def vel_m1(self, event):
-       self.vel.setValue(event)
-       self.vel_porcentaje.setText(str(event))
-       vel1= 'VEL=' + str(event) + '/'
-       self.send_data(vel1)
-    def vel_m2(self, event):
-       self.vel_2.setValue(event)
-       self.vel_porcentaje_2.setText(str(event))
-       vel2= 'VEL2=' + str(event) + '/'
-       self.send_data(vel2)
-    def vel_sm(self, event):
-       self.vel_3.setValue(event)
-       self.vel_porcentaje_3.setText(str(event))
-       vel3= 'VELS=' + str(event) + '/'
-       self.send_data(vel3)
 
     def control_led1(self, param):
       if param == 'click':
-          led1 = 'led1*' 
+          led1 = 'a' 
+      self.send_data(led1)
+
+    def control_led1off(self, param):
+      if param == 'click':
+          led1 = 'b' 
       self.send_data(led1)
 
     def control_led2(self, param):
       if param == 'click':
-          led2 = 'led2*'
+          led2 = 'c'
+      self.send_data(led2)
+
+    def control_led2off(self, param):
+      if param == 'click':
+          led2 = 'd'
+      self.send_data(led2) 
+
+    def control_led3(self, param):
+      if param == 'click':
+          led2 = 'e'
+      self.send_data(led2)
+
+    def control_led3off(self, param):
+      if param == 'click':
+          led2 = 'f'
+      self.send_data(led2)
+
+    def control_led4(self, param):
+      if param == 'click':
+          led2 = 'g'
+      self.send_data(led2)
+
+    def control_led4off(self, param):
+      if param == 'click':
+          led2 = 'h'
       self.send_data(led2) 
        
+    def control_led5(self, param):
+      if param == 'click':
+          led2 = 'i'
+      self.send_data(led2)
+
+    def control_led5off(self, param):
+      if param == 'click':
+          led2 = 'j'
+      self.send_data(led2) 
+
+    def control_led6(self, param):
+      if param == 'click':
+          led2 = 'k'
+      self.send_data(led2)
+
+    def control_led6off(self, param):
+      if param == 'click':
+          led2 = 'l'
+      self.send_data(led2) 
+
+    def control_led7(self, param):
+      if param == 'click':
+          led2 = 'm'
+      self.send_data(led2)
+
+    def control_led7off(self, param):
+      if param == 'click':
+          led2 = 'n'
+      self.send_data(led2) 
+
+    def control_led8(self, param):
+      if param == 'click':
+          led2 = 'ñ'
+      self.send_data(led2)
+
+    def control_led8off(self, param):
+      if param == 'click':
+          led2 = 'o'
+      self.send_data(led2) 
+
     def control_stop(self, param):
       if param == 'click':
-          stop = 'stop*'
+          stop = 't'
       self.send_data(stop) 
 
     def control_left(self, param):
       if param == 'click':
-          left = 'left*'
+          left = 'p'
       self.send_data(left) 
 
     def control_right(self, param):
       if param == 'click':
-          right = 'right*'
+          right = 'q'
       self.send_data(right) 
 
     def control_stop_2(self, param):
       if param == 'click':
-          stop2 = 'stop2*'
+          stop2 = 'u'
       self.send_data(stop2) 
 
     def control_left_2(self, param):
       if param == 'click':
-          left2 = 'left2*'
+          left2 = 'r'
       self.send_data(left2) 
 
     def control_right_2(self, param):
       if param == 'click':
-          right2 = 'right2*'
+          right2 = 's'
       self.send_data(right2) 
-
-    def control_stop_3(self, param):
-      if param == 'click':
-          stop3 = 'stop3*'
-      self.send_data(stop3) 
-
-    def control_left_3(self, param):
-      if param == 'click':
-          left3 = 'left3*'
-      self.send_data(left3) 
-
-    def control_right_3(self, param):
-      if param == 'click':
-          right3 = 'right3*'
-      self.send_data(right3) 
     
     def mousePressEvent(self, event):
       self.click_posicion = event.globalPos()
